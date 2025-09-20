@@ -1,9 +1,7 @@
 package pilhas;
-
 import pilhas.Exeception.PilhaVaziaExeception;
 
-import java.util.ArrayDeque;
-import java.util.Stack;
+import java.util.Arrays;
 
 public class PilhaImpl implements Pilha {
 
@@ -24,26 +22,48 @@ public class PilhaImpl implements Pilha {
 
     @Override
     public int size() {
-        return 0;
+        return t+1;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return t == -1;
     }
 
     @Override
     public Object top() throws PilhaVaziaExeception {
-        return null;
+        if (isEmpty()){
+            throw new PilhaVaziaExeception("A PilhaRubroNegro está vazia");
+        }
+        return itens[t];
     }
 
     @Override
     public void push(Object o) {
-
+        if (t >= capacidade-1){
+            if (FC==0){
+                capacidade *= 2;
+            } else {
+                capacidade+= FC;
+            }
+            Object[] copia = new Object[capacidade];
+            for (int i = 0; i < itens.length; i++){
+                copia[i] = itens[i];
+            }
+            itens = copia;
+        }
+        itens[++t] = o;
     }
 
     @Override
     public Object pop() throws PilhaVaziaExeception {
-        return null;
+        if (isEmpty()){
+            throw new PilhaVaziaExeception("A PilhaRubroNegro está vazia");
+        }
+        return itens[t--];
+    }
+
+    public void print(){
+        System.out.println(Arrays.toString(itens));;
     }
 }
