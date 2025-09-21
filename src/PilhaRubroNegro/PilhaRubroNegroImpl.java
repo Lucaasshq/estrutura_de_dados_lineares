@@ -106,5 +106,5 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
 
     public void print(){
         System.out.println(Arrays.toString(array));
-    }dd
+    }
 }
