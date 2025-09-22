@@ -3,7 +3,10 @@ package PilhaRubroNegro;
 import pilhas.Exeception.PilhaVaziaExeception;
 
 public interface PilhaRubroNegro {
-    public int size();
+    public int sizeV();
+    public int sizeP();
+    public boolean isEmptyV();
+    public boolean isEmptyP();
     public boolean isEmpty();
     public Object topV() throws PilhaVaziaExeception;
     public Object topP() throws PilhaVaziaExeception;
@@ -12,4 +15,6 @@ public interface PilhaRubroNegro {
     public Object popV() throws PilhaVaziaExeception;
     public Object popP() throws PilhaVaziaExeception;
     public void print();
+    public void reduzir();
+
 }
