@@ -17,9 +17,48 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
         array =  new Object[capacidade];
     }
 
+    public void reduzir(){
+        if (isEmpty()){
+            throw new PilhaVaziaExeception("A PilhaRubroNegro está vazia");
+        }
+
+        if ((tamPilhaPreta+tamPilhaVermelho) <= (capacidade/3)){
+
+            int antigaCapacidade = capacidade;
+            int novaCapacidade = capacidade/2;
+
+            Object[] novoArray = new Object[novaCapacidade];
+
+            for (int i = 0; i < tamPilhaVermelho; i++){
+                novoArray[i] = array[i];
+            }
+
+            for (int i = 0; i < tamPilhaPreta; i++){
+                novoArray[novaCapacidade-1-i] = array[antigaCapacidade-1-i];
+            }
+            array=novoArray;
+            capacidade = novaCapacidade;
+        }
+    }
+
     @Override
-    public int size() {
-        return (tamPilhaVermelho) + (tamPilhaPreta);
+    public int sizeV() {
+        return tamPilhaVermelho;
+    }
+
+    @Override
+    public int sizeP() {
+        return tamPilhaPreta;
+    }
+
+    @Override
+    public boolean isEmptyV() {
+        return tamPilhaVermelho == 0;
+    }
+
+    @Override
+    public boolean isEmptyP() {
+        return tamPilhaPreta == 0;
     }
 
     @Override
@@ -29,7 +68,7 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
 
     @Override
     public Object topV() throws PilhaVaziaExeception {
-        if (isEmpty()){
+        if (isEmptyV()){
             throw new PilhaVaziaExeception("A PilhaRubroNegro está vazia");
         }
         return array[tamPilhaVermelho-1];
@@ -37,7 +76,7 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
 
     @Override
     public Object topP() throws PilhaVaziaExeception {
-        if (isEmpty()){
+        if (isEmptyP()){
             throw new PilhaVaziaExeception("A PilhaRubroNegro está vazia");
         }
        return array[capacidade-tamPilhaPreta];
@@ -61,6 +100,11 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
           array = novoArray;
           capacidade = novaCapacidade;
         }
+
+        if (capacidade <= capacidade/3){
+            reduzir();
+        }
+
         array[tamPilhaVermelho] = o;
         tamPilhaVermelho++;
     }
