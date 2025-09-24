@@ -84,7 +84,7 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
 
     @Override
     public void pushV(Object o) {
-        if (tamPilhaVermelho + tamPilhaPreta >= capacidade-1){
+        if (tamPilhaVermelho + tamPilhaPreta >= capacidade){
          int novaCapacidade = capacidade * 2;
           Object[] novoArray = new Object[novaCapacidade];
 
@@ -100,18 +100,13 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
           array = novoArray;
           capacidade = novaCapacidade;
         }
-
-        if (capacidade <= capacidade/3){
-            reduzir();
-        }
-
         array[tamPilhaVermelho] = o;
         tamPilhaVermelho++;
     }
 
     @Override
     public void pushP(Object o) {
-        if (tamPilhaVermelho + tamPilhaPreta >= capacidade-1){
+        if (tamPilhaVermelho + tamPilhaPreta >= capacidade){
             int novaCapacidade = capacidade * 2;
             Object[] novoArray = new Object[novaCapacidade];
 
@@ -136,7 +131,13 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
         if (tamPilhaVermelho == 0) {
             throw new PilhaVaziaExeception("A PilhaRubroNegro está vazia");
         }
-        return array[--tamPilhaVermelho];
+
+        Object o = array[tamPilhaVermelho-1];
+        tamPilhaVermelho--;
+        if ((tamPilhaVermelho + tamPilhaPreta) <= capacidade / 3) {
+            reduzir();
+        }
+        return o;
     }
 
     @Override
@@ -144,8 +145,13 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
         if (tamPilhaPreta == 0){
             throw new PilhaVaziaExeception("A PilhaRubroNegro está vazia");
         }
+        Object o = array[capacidade - tamPilhaPreta];
         tamPilhaPreta--;
-        return array[capacidade - tamPilhaPreta-1];
+
+        if ((tamPilhaVermelho + tamPilhaPreta) <= capacidade / 3) {
+            reduzir();
+        }
+        return  o;
     }
 
     public void print(){
