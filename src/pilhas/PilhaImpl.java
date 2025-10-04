@@ -33,7 +33,7 @@ public class PilhaImpl implements Pilha {
     @Override
     public Object top() throws PilhaVaziaExeception {
         if (isEmpty()){
-            throw new PilhaVaziaExeception("A PilhaRubroNegro está vazia");
+            throw new PilhaVaziaExeception("A pilhas.PilhaRubroNegro está vazia");
         }
         return itens[t];
     }
@@ -58,7 +58,7 @@ public class PilhaImpl implements Pilha {
     @Override
     public Object pop() throws PilhaVaziaExeception {
         if (isEmpty()){
-            throw new PilhaVaziaExeception("A PilhaRubroNegro está vazia");
+            throw new PilhaVaziaExeception("A pilhas.PilhaRubroNegro está vazia");
         }
         return itens[t--];
     }

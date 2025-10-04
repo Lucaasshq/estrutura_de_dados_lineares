@@ -1,9 +1,4 @@
-package PilhaRubroNegro;
-
-import pilhas.Pilha;
-import pilhas.PilhaImpl;
-
-import java.util.Arrays;
+package pilhas.PilhaRubroNegro;
 
 public class Main {
     public static void main(String[] args) {

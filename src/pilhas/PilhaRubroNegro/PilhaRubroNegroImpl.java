@@ -1,4 +1,4 @@
-package PilhaRubroNegro;
+package pilhas.PilhaRubroNegro;
 import pilhas.Exeception.PilhaVaziaExeception;
 
 import java.util.Arrays;
@@ -19,7 +19,7 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
 
     public void reduzir(){
         if (isEmpty()){
-            throw new PilhaVaziaExeception("A PilhaRubroNegro está vazia");
+            throw new PilhaVaziaExeception("A pilhas.PilhaRubroNegro está vazia");
         }
 
         if ((tamPilhaPreta+tamPilhaVermelho) <= (capacidade/3)){
@@ -69,7 +69,7 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
     @Override
     public Object topV() throws PilhaVaziaExeception {
         if (isEmptyV()){
-            throw new PilhaVaziaExeception("A PilhaRubroNegro está vazia");
+            throw new PilhaVaziaExeception("A pilhas.PilhaRubroNegro está vazia");
         }
         return array[tamPilhaVermelho-1];
     }
@@ -77,7 +77,7 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
     @Override
     public Object topP() throws PilhaVaziaExeception {
         if (isEmptyP()){
-            throw new PilhaVaziaExeception("A PilhaRubroNegro está vazia");
+            throw new PilhaVaziaExeception("A pilhas.PilhaRubroNegro está vazia");
         }
        return array[capacidade-tamPilhaPreta];
     }
@@ -129,7 +129,7 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
     @Override
     public Object popV() throws PilhaVaziaExeception {
         if (tamPilhaVermelho == 0) {
-            throw new PilhaVaziaExeception("A PilhaRubroNegro está vazia");
+            throw new PilhaVaziaExeception("A pilhas.PilhaRubroNegro está vazia");
         }
 
         Object o = array[tamPilhaVermelho-1];
@@ -143,7 +143,7 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
     @Override
     public Object popP() throws PilhaVaziaExeception {
         if (tamPilhaPreta == 0){
-            throw new PilhaVaziaExeception("A PilhaRubroNegro está vazia");
+            throw new PilhaVaziaExeception("A pilhas.PilhaRubroNegro está vazia");
         }
         Object o = array[capacidade - tamPilhaPreta];
         tamPilhaPreta--;

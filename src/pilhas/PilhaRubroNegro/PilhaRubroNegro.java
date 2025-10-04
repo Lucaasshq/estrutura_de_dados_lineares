@@ -1,4 +1,4 @@
-package PilhaRubroNegro;
+package pilhas.PilhaRubroNegro;
 
 import pilhas.Exeception.PilhaVaziaExeception;
 

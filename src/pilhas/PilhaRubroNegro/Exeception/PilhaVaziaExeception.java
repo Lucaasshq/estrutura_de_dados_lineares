@@ -1,4 +1,4 @@
-package PilhaRubroNegro.Exeception;
+package pilhas.PilhaRubroNegro.Exeception;
 
 public class PilhaVaziaExeception extends RuntimeException {
     public PilhaVaziaExeception(String message) {
