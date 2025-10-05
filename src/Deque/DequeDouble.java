@@ -38,7 +38,7 @@ public class DequeDouble implements IDeque {
         Node newNode = new Node(o);
 
         if (isEmpty()){
-            tail = head = newNode;
+            head = tail = newNode;
         } else {
             newNode.prev = tail;
             tail.next = newNode;
@@ -49,12 +49,34 @@ public class DequeDouble implements IDeque {
 
     @Override
     public Object removeFirst() {
-        return null;
+        if (isEmpty()){
+            throw new DequeVaziaExeception("Deque vazio");
+        }
+        Object value = head.value;
+        head = head.next;
+        if (head == null){
+            tail = null;
+        } else {
+            head.prev = null;
+        }
+        size--;
+        return value;
     }
 
     @Override
     public Object removeLast() {
-        return null;
+        if (isEmpty()){
+            throw new DequeVaziaExeception("Deque vazio");
+        }
+        Object value = tail.value;
+        tail = tail.prev;
+        if (tail == null){
+            head = null;
+        } else {
+            tail.next = null;
+        }
+        size--;
+        return value;
     }
 
     @Override
