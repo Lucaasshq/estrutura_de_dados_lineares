@@ -1,7 +1,5 @@
 package Deque;
-
 import Deque.Exeception.DequeVaziaExeception;
-
 public class DequeDouble implements IDeque {
 
     private class Node {
@@ -18,8 +16,9 @@ public class DequeDouble implements IDeque {
     private Node head = null;
     private Node tail = null;
     private int size = 0;
-
-
+    /**
+     O(1)
+      **/
     @Override
     public void addFirst(Object o) {
         Node newNode = new Node(o);
@@ -32,7 +31,9 @@ public class DequeDouble implements IDeque {
         }
         size++;
     }
-
+    /**
+     O(1)
+     **/
     @Override
     public void addLast(Object o) {
         Node newNode = new Node(o);
@@ -46,7 +47,9 @@ public class DequeDouble implements IDeque {
         }
         size++;
     }
-
+    /**
+     O(1)
+     **/
     @Override
     public Object removeFirst() {
         if (isEmpty()){
@@ -62,7 +65,9 @@ public class DequeDouble implements IDeque {
         size--;
         return value;
     }
-
+    /**
+     O(1)
+     **/
     @Override
     public Object removeLast() {
         if (isEmpty()){
@@ -78,7 +83,9 @@ public class DequeDouble implements IDeque {
         size--;
         return value;
     }
-
+    /**
+     O(1)
+     **/
     @Override
     public Object first() {
         if (isEmpty()){
@@ -86,7 +93,9 @@ public class DequeDouble implements IDeque {
         }
         return head.value;
     }
-
+    /**
+     O(1)
+     **/
     @Override
     public Object last() {
         if (isEmpty()){
@@ -94,12 +103,16 @@ public class DequeDouble implements IDeque {
         }
         return  tail.value;
     }
-
+    /**
+     O(1)
+     **/
     @Override
     public int size() {
         return size;
     }
-
+    /**
+     O(1)
+     **/
     @Override
     public boolean isEmpty() {
         return size == 0;
