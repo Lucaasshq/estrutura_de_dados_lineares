@@ -1,5 +1,11 @@
 package Deque;
 import Deque.Exeception.DequeVaziaExeception;
+/**
+ * @author Lucas Henrique
+ * @description Deque usando Lista Duplamente Encadeada
+ * @matricula 20242014040042
+ * @IFRN
+ */
 public class DequeDouble implements IDeque {
 
     private class Node {
@@ -17,28 +23,28 @@ public class DequeDouble implements IDeque {
     private Node tail = null;
     private int size = 0;
     /**
-     O(1)
-      **/
+     * O(1)
+     **/
     @Override
     public void addFirst(Object o) {
         Node newNode = new Node(o);
-        if (isEmpty()){
+        if (isEmpty()) {
             head = tail = newNode;
         } else {
             newNode.next = head;
-            head.prev = newNode ;
+            head.prev = newNode;
             head = newNode;
         }
         size++;
     }
     /**
-     O(1)
+     * O(1)
      **/
     @Override
     public void addLast(Object o) {
         Node newNode = new Node(o);
 
-        if (isEmpty()){
+        if (isEmpty()) {
             head = tail = newNode;
         } else {
             newNode.prev = tail;
@@ -48,16 +54,16 @@ public class DequeDouble implements IDeque {
         size++;
     }
     /**
-     O(1)
+     * O(1)
      **/
     @Override
     public Object removeFirst() {
-        if (isEmpty()){
+        if (isEmpty()) {
             throw new DequeVaziaExeception("Deque vazio");
         }
         Object value = head.value;
         head = head.next;
-        if (head == null){
+        if (head == null) {
             tail = null;
         } else {
             head.prev = null;
@@ -66,16 +72,16 @@ public class DequeDouble implements IDeque {
         return value;
     }
     /**
-     O(1)
+     * O(1)
      **/
     @Override
     public Object removeLast() {
-        if (isEmpty()){
+        if (isEmpty()) {
             throw new DequeVaziaExeception("Deque vazio");
         }
         Object value = tail.value;
         tail = tail.prev;
-        if (tail == null){
+        if (tail == null) {
             head = null;
         } else {
             tail.next = null;
@@ -84,34 +90,34 @@ public class DequeDouble implements IDeque {
         return value;
     }
     /**
-     O(1)
+     * O(1)
      **/
     @Override
     public Object first() {
-        if (isEmpty()){
+        if (isEmpty()) {
             throw new DequeVaziaExeception("O Deque está vazio");
         }
         return head.value;
     }
     /**
-     O(1)
+     * O(1)
      **/
     @Override
     public Object last() {
-        if (isEmpty()){
+        if (isEmpty()) {
             throw new DequeVaziaExeception("O Deque está vazio");
         }
-        return  tail.value;
+        return tail.value;
     }
     /**
-     O(1)
+     * O(1)
      **/
     @Override
     public int size() {
         return size;
     }
     /**
-     O(1)
+     * O(1)
      **/
     @Override
     public boolean isEmpty() {

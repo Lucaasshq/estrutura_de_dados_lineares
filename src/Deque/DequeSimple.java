@@ -3,9 +3,10 @@ package Deque;
 import Deque.Exeception.DequeVaziaExeception;
 
 /**
-    @description Deque usando Lista Simples encadeada
-    @author Lucas Henrique
-
+ * @author Lucas Henrique
+ * @description Deque usando Lista Simples encadeada
+ * @matricula 20242014040042
+ * @IFRN
  */
 
 public class DequeSimple implements IDeque {
