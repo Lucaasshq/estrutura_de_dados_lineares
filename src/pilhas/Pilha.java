@@ -1,7 +1,11 @@
 package pilhas;
-
 import pilhas.Exeception.PilhaVaziaExeception;
-
+/**
+ * @author Lucas Henrique
+ * @description Pilha
+ * @matricula 20242014040042
+ * @IFRN
+ */
 public interface Pilha {
     public int size();
     public boolean isEmpty();

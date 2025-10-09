@@ -1,7 +1,12 @@
 package pilhas.PilhaRubroNegro;
 
 import pilhas.Exeception.PilhaVaziaExeception;
-
+/**
+ * @author Lucas Henrique
+ * @description Pilha Rubro Negro
+ * @matricula 20242014040042
+ * @IFRN
+ */
 public interface PilhaRubroNegro {
     public int sizeV();
     public int sizeP();
@@ -16,5 +21,4 @@ public interface PilhaRubroNegro {
     public Object popP() throws PilhaVaziaExeception;
     public void print();
     public void reduzir();
-
 }

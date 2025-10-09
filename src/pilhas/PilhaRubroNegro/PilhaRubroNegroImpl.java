@@ -18,7 +18,7 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
 
     public void reduzir() {
         if (isEmpty()) {
-            throw new PilhaVaziaExeception("A pilhas.PilhaRubroNegro está vazia");
+            throw new PilhaVaziaExeception("A PilhaRubroNegro está vazia");
         }
 
         if ((tamPilhaPreta + tamPilhaVermelho) <= (capacidade / 3)) {
@@ -103,9 +103,10 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
     @Override
     public Object popV() throws PilhaVaziaExeception {
         if (tamPilhaVermelho == 0) {
-            throw new PilhaVaziaExeception("A pilhas.PilhaRubroNegro está vazia");
+            throw new PilhaVaziaExeception(
+                    "A pilhas.PilhaRubroNegro está vazia"
+            );
         }
-
         Object o = array[tamPilhaVermelho - 1];
         tamPilhaVermelho--;
         if ((tamPilhaVermelho + tamPilhaPreta) <= capacidade / 3) {
@@ -117,7 +118,9 @@ public class PilhaRubroNegroImpl implements PilhaRubroNegro {
     @Override
     public Object popP() throws PilhaVaziaExeception {
         if (tamPilhaPreta == 0) {
-            throw new PilhaVaziaExeception("A pilhas.PilhaRubroNegro está vazia");
+            throw new PilhaVaziaExeception(
+                    "A pilhas.PilhaRubroNegro está vazia"
+            );
         }
         Object o = array[capacidade - tamPilhaPreta];
         tamPilhaPreta--;
