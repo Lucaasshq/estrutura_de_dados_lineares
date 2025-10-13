@@ -76,7 +76,7 @@ public class DequeSimple implements IDeque {
         Object valor = tail.value;
         if (size == 1) {
             head = tail = null;
-        } else {
+
             Node atual = head;
             while (atual.next != tail) {
                 atual = atual.next;
