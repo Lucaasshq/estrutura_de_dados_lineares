@@ -1,4 +1,5 @@
 package Vetor;
 
-public class Vetor {
+public class Vetor implements IVetor  {
+    
 }
