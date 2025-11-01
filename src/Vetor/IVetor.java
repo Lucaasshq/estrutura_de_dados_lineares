@@ -10,13 +10,13 @@ package Vetor;
 
 public interface IVetor {
     
-    public Object elemAtRank(Integer r);
+    public Object elemAtRank(int r);
 
-    public Object replaceArRank(Interger r, Object o);
+    public Object replaceArRank(int r, Object o);
 
-    public void insertAtRank(Interger r, Object o);
+    public void insertAtRank(int r, Object o);
 
-    public Object removeAtRank(Interger r);
+    public Object removeAtRank(int r);
 
     public int size();
 
