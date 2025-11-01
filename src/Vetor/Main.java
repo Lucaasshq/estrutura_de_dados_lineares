@@ -20,5 +20,23 @@ public class Main {
         System.out.println(v.removeAtRank(5));
         v.printVetor();
 
+        System.out.println("==============Linked vetor==============");
+
+        VetorLinkedList v2 = new VetorLinkedList(10);
+
+        for (int i = 0; i < 10; i++){
+            v2.insertAtRank(i,i);
+        }
+
+        v2.printVetorLinked();
+
+        System.out.println(v2.replaceArRank(5, 10));
+        v2.printVetorLinked();
+
+        System.out.println(v2.removeAtRank(2));
+        v2.printVetorLinked();
+        System.out.println(v2.removeAtRank(5));
+        v2.printVetorLinked();
+
     }
 }

@@ -137,4 +137,25 @@ public class VetorLinkedList implements IVetor {
     public boolean isEmpty() {
         return size == 0;
     }
+
+    public void printVetorLinked(){
+        if (isEmpty()) {
+            System.out.println("[]");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder("[");
+        Node current = head;
+
+        while (current != null) {
+            sb.append(current.value);
+            if (current.next != null) {
+                sb.append(", ");
+            }
+            current = current.next;  // ← IMPORTANTE: mover para o próximo!
+        }
+
+        sb.append("]");
+        System.out.println(sb.toString());
+    }
 }
