@@ -21,11 +21,11 @@ public class VetorLinkedList implements IVetor {
     private int size;
     private int capacidade;
 
-    public VetorLinkedList(int caoacidade){
+    public VetorLinkedList(int capacidade){
         this.head = null;
         this.tail = null;
         this.size = 0;
-        this.capacidade = 0;
+        this.capacidade = capacidade;
     }
 
     @Override
@@ -43,7 +43,14 @@ public class VetorLinkedList implements IVetor {
 
     @Override
     public Object replaceArRank(int rank, Object o) {
-        return null;
+        if (rank < 0 || rank >= size){
+            throw new RankNotFoundExeception("Rank fora do limite ou não encontrado");
+        }
+
+        Node current = elemAtRank(rank);
+        Object oldValue = current.value;
+        current.value = o;
+        return  oldValue;
     }
 
     @Override
@@ -69,8 +76,8 @@ public class VetorLinkedList implements IVetor {
 
             // insere no final
         } else if (rank == size()) {
-            tail.next = newNode;
             newNode.prev = tail;
+            tail.next = newNode;
             tail = newNode;
 
         } else {
@@ -78,9 +85,9 @@ public class VetorLinkedList implements IVetor {
             Node prevNode = currentNode.prev;
 
             newNode.prev = prevNode;
-            newNode.next = currentNode;
-
             prevNode.next = newNode;
+
+            newNode.next = currentNode;
             currentNode.prev = newNode;
         }
         size++;
@@ -89,7 +96,36 @@ public class VetorLinkedList implements IVetor {
 
     @Override
     public Object removeAtRank(int rank) {
-        return null;
+        if (rank < 0 || rank >= size){
+            throw new RankNotFoundExeception("Rank fora do limite ou não encontrado");
+        }
+
+        Node nodeToRemove;
+        // Remover Unico elemento
+        if (size == 1){
+            nodeToRemove = head;
+            head = null;
+            tail = null;
+        } else if (rank == 0) {
+            //remover do inicio
+            nodeToRemove = head;
+            head = head.next;
+            head.prev = null;
+        } else if (rank == size-1) {
+            //remove final
+            nodeToRemove = tail;
+            tail = tail.prev;
+            tail.next = null;
+        } else {
+            nodeToRemove = elemAtRank(rank);
+            Node prevNode = nodeToRemove.prev;
+
+            prevNode.next = nodeToRemove.next;
+            nodeToRemove.next.prev = prevNode;
+        }
+        size--;
+        return nodeToRemove.value;
+
     }
 
     @Override
