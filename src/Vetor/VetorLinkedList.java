@@ -11,21 +11,22 @@ public class VetorLinkedList implements IVetor {
 
         Node(Object value){
             this.value = value;
-            this.next = null;
-            this.prev = null;
         }
     }
 
-    private Node head;
-    private Node tail;
+    private Node headSentinela;
+    private Node tailSentinela;
     private int size;
     private int capacidade;
 
     public VetorLinkedList(int capacidade){
-        this.head = null;
-        this.tail = null;
         this.size = 0;
         this.capacidade = capacidade;
+
+        headSentinela = new Node(null);
+        tailSentinela = new Node(null);
+        headSentinela.next = tailSentinela;
+        tailSentinela.prev = headSentinela;
     }
 
     @Override
@@ -34,7 +35,7 @@ public class VetorLinkedList implements IVetor {
             throw new RankNotFoundExeception("Rank não ecncontrado");
         }
 
-        Node current = head;
+        Node current = headSentinela.next;
         for (int i = 0; i < rank; i++){
             current = current.next;
         }
@@ -63,69 +64,30 @@ public class VetorLinkedList implements IVetor {
         if (size == capacidade){
             throw new VetorCheioExeception("Vetor está cheio.");
         }
-        Node newNode = new Node(o);
-        // Lista vazia
-        if (isEmpty()){
-            head = tail = newNode;
-
-            // Inseri no inicio
-        } else if (rank == 0) {
-            newNode.next = head;
-            head.prev = newNode;
-            head = newNode;
-
-            // insere no final
-        } else if (rank == size()) {
-            newNode.prev = tail;
-            tail.next = newNode;
-            tail = newNode;
-
+        Node current;
+        if (rank == size) {
+            current = tailSentinela; // inserir no final
         } else {
-            Node currentNode = elemAtRank(rank);
-            Node prevNode = currentNode.prev;
-
-            newNode.prev = prevNode;
-            prevNode.next = newNode;
-
-            newNode.next = currentNode;
-            currentNode.prev = newNode;
+            current = elemAtRank(rank); // inserir no meio
         }
+
+        Node newNode = new Node(o);
+        newNode.prev = current.prev;
+        newNode.next = current;
+        current.prev.next = newNode;
+        current.prev = newNode;
         size++;
 
     }
 
     @Override
     public Object removeAtRank(int rank) {
-        if (rank < 0 || rank >= size){
-            throw new RankNotFoundExeception("Rank fora do limite ou não encontrado");
-        }
+        Node nodeToRemove = elemAtRank(rank);
+        nodeToRemove.prev.next = nodeToRemove.next;
+        nodeToRemove.next.prev = nodeToRemove.prev;
 
-        Node nodeToRemove;
-        // Remover Unico elemento
-        if (size == 1){
-            nodeToRemove = head;
-            head = null;
-            tail = null;
-        } else if (rank == 0) {
-            //remover do inicio
-            nodeToRemove = head;
-            head = head.next;
-            head.prev = null;
-        } else if (rank == size-1) {
-            //remove final
-            nodeToRemove = tail;
-            tail = tail.prev;
-            tail.next = null;
-        } else {
-            nodeToRemove = elemAtRank(rank);
-            Node prevNode = nodeToRemove.prev;
-
-            prevNode.next = nodeToRemove.next;
-            nodeToRemove.next.prev = prevNode;
-        }
         size--;
         return nodeToRemove.value;
-
     }
 
     @Override
@@ -145,14 +107,14 @@ public class VetorLinkedList implements IVetor {
         }
 
         StringBuilder sb = new StringBuilder("[");
-        Node current = head;
+        Node current = headSentinela.next;
 
-        while (current != null) {
+        while (current != tailSentinela) {
             sb.append(current.value);
-            if (current.next != null) {
+            if (current.next != tailSentinela) {
                 sb.append(", ");
             }
-            current = current.next;  // ← IMPORTANTE: mover para o próximo!
+            current = current.next;  
         }
 
         sb.append("]");
