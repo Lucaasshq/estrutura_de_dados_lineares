@@ -14,8 +14,8 @@ public class VetorLinkedList implements IVetor {
         }
     }
 
-    private Node headSentinela;
-    private Node tailSentinela;
+    private final Node headSentinela;
+    private final Node tailSentinela;
     private int size;
     private int capacidade;
 
