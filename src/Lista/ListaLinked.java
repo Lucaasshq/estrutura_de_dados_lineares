@@ -1,7 +1,7 @@
 package Lista;
 
-public class ListaLinked implements ILista {
-    private class Node {
+public class ListaLinked {
+    public class Node {
         Object value;
         Node next, prev;
 
@@ -24,121 +24,102 @@ public class ListaLinked implements ILista {
     }
 
 
-    @Override
-    public Object first() {
+
+    public Node first() {
         if(size > 0){
-            return headSentinela.next.value;
+            return headSentinela.next;
         } else {
             throw new RuntimeException("Lista esta vazia");
         }
     }
 
-    @Override
-    public Object last() {
+
+    public Node last() {
         if (size > 0){
-            return tailSentinela.prev.value;
+            return tailSentinela.prev;
         } else {
             throw new RuntimeException("Lista esta vazia");
         }
     }
 
-    @Override
-    public Object before(int rank) {
-        if (rank <= 0 || rank >= size){
-            throw new RuntimeException("Não há elemento anterior");
-        }
 
-        Node current = getAtNode(rank);
-        return current.prev.value;
+    public Node before(Node node) {
+        if (node.prev == headSentinela) {
+            throw new RuntimeException("Não existe nó antes");
+        }
+        return node.prev;
     }
 
-    @Override
-    public Object after(int rank) {
-        if (rank < 0 || rank >=size-1){
-            throw new RuntimeException("Não há elemento posterior");
+
+    public Node after(Node node) {
+        if (node.next == tailSentinela){
+            throw new RuntimeException("Não existe nó depois");
         }
-        Node current = getAtNode(rank);
-        return current.next.value;
+        return node.next;
     }
 
-    @Override
+
     public int size() {
         return size;
     }
 
-    @Override
+
     public boolean isEmpty() {
         return size == 0;
     }
 
-    @Override
-    public boolean isFirst(int r) {
-        return r == 0;
+
+    public boolean isFirst(Node node) {
+        return headSentinela.next == node;
 
     }
 
-    @Override
-    public boolean isLast(int r) {
-        return  r == size-1;
+    public boolean isLast(Node node) {
+        return  tailSentinela.prev == node;
     }
 
-    @Override
-    public Object replaceElements(int rank, Object o) {
-        if (rank < 0 || rank >= size){
-            throw new RuntimeException("Rank fora do limite da Lista");
+    public void replaceElements(Node node, Object o) {
+        if (node == headSentinela || node == tailSentinela){
+            throw new RuntimeException("Não é possivel alterar valor de nó sentinela");
         }
-        Node current = getAtNode(rank);
-        Object oldElement = current.value;
-        current.value = o;
-        return oldElement;
+        node.value = o;
     }
 
-    @Override
-    public void swapElements(int rank1, int rank2) {
-        if ((rank1 < 0 || rank1 >= size) || (rank2 < 0 || rank2 >= size)){
-            throw new RuntimeException("Rank fora do limite da Lista");
+    public void swapElements(Node node1, Node node2) {
+        if ((node1 == headSentinela || node1 == tailSentinela) || (node2 == headSentinela || node2 == tailSentinela )){
+            throw new RuntimeException("Não é possivel alterar valor de nó sentinela");
         }
-        Node node1 = getAtNode(rank1);
-        Node node2 = getAtNode(rank2);
-        Object valueNode1 = node1.value;
+        Object temp = node1.value;
         node1.value = node2.value;
-        node2.value = valueNode1;
+        node2.value = temp;
     }
 
-    @Override
-    public void insertBefore(int rank, Object o) {
-        if (rank < 0 || rank >= size){
-            throw new RuntimeException("Rank fora do limite da Lista");
+    public void insertBefore(Node node, Object o) {
+        if (node == headSentinela){
+            throw new RuntimeException("Não é possivel alterar valor de nó sentinela");
         }
-        Node current = getAtNode(rank);
         Node newNode = new Node(o);
+        newNode.prev = node.prev;
+        newNode.next = node;
 
-        newNode.prev = current.prev;
-        newNode.next = current;
-
-        current.prev.next = newNode;
-        current.prev = newNode;
-        size++;
-
-    }
-
-    @Override
-    public void insertAfter(int rank, Object o) {
-        if (rank < 0 || rank >= size){
-            throw new RuntimeException("Rank fora do limite da Lista");
-        }
-        Node current = getAtNode(rank);
-        Node newNode = new Node(o);
-
-        newNode.prev = current;
-        newNode.next = current.next;
-
-        current.next.prev = newNode;
-        current.next = newNode;
+        node.prev.next = newNode;
+        node.prev = newNode;
         size++;
     }
 
-    @Override
+    public void insertAfter(Node node, Object o) {
+        if (node == tailSentinela){
+            throw new RuntimeException("Não é possivel alterar valor de nó sentinela");
+        }
+        Node newNode = new Node(o);
+        newNode.prev = node;
+        newNode.next = node.next;
+
+        node.next.prev = newNode;
+        node.next = newNode;
+        size++;
+    }
+
     public void insertFirst(Object o) {
         Node newNode = new Node(o);
         newNode.prev = headSentinela;
@@ -150,7 +131,6 @@ public class ListaLinked implements ILista {
 
     }
 
-    @Override
     public void insertLast(Object o) {
          Node newNode = new Node(o);
          newNode.prev = tailSentinela.prev;
@@ -161,19 +141,17 @@ public class ListaLinked implements ILista {
          size++;
     }
 
-    @Override
-    public Object remove(int rank) {
-        if (rank >= size || rank < 0){
-            throw new RuntimeException("Rank fora do limite da Lista");
+    public Object remove(Node node) {
+        if (node == headSentinela || node == tailSentinela){
+            throw new RuntimeException("Não é remover valor de nó sentinela");
         }
-        Node nodeToRemove = getAtNode(rank);
-        nodeToRemove.prev.next = nodeToRemove.next;
-        nodeToRemove.next.prev = nodeToRemove.prev;
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
         size--;
-        return  nodeToRemove.value;
+        return node;
     }
 
-    private Node getAtNode(int rank){
+    public Node AtRank(int rank){
         if (rank < 0 || rank >= size){
             throw new IndexOutOfBoundsException("Indice fora do limite");
         }
@@ -185,4 +163,19 @@ public class ListaLinked implements ILista {
         return current;
     }
 
+    public int rankOf(Node node){
+        if (node == headSentinela || node == tailSentinela){
+            throw new RuntimeException("Não é remover valor de nó sentinela");
+        }
+       int rank = 0;
+       Node current = headSentinela.next;
+       while (current != tailSentinela){
+           if (current == node){
+               return rank;
+           }
+           current = current.next;
+           rank++;
+       }
+       throw new RuntimeException("Esse nó não faz parte da lista");
+    }
 }
