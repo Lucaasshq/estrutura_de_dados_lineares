@@ -1,5 +1,7 @@
 package Lista;
 
+import java.util.Arrays;
+
 public class Lista  {
     private Object[] array;
     private int size;
@@ -167,7 +169,13 @@ public class Lista  {
         for (int i = rank; i < size-1; i++){
             array[i] = array[i+1];
         }
+        array[size-1] = null;
         size--;
         return elementoRemove;
+    }
+
+
+    public void printLista(){
+        System.out.println(Arrays.toString(array));
     }
 }
