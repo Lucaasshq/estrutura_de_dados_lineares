@@ -9,10 +9,10 @@ public class Main {
             v.insertAtRank(i,i);
         }
 
-        v.printVetor();
-        System.out.println(v.elemAtRank(5));
+        v.printVetor();System.out.println(v.elemAtRank(5));
 
         v.replaceArRank(5, 10);
+
         v.printVetor();
 
         System.out.println(v.removeAtRank(2));

@@ -25,18 +25,18 @@ public class ListaLinked {
 
 
 
-    public Node first() {
+    public Object first() {
         if(size > 0){
-            return headSentinela.next;
+            return headSentinela.next.value;
         } else {
             throw new RuntimeException("Lista esta vazia");
         }
     }
 
 
-    public Node last() {
+    public Object last() {
         if (size > 0){
-            return tailSentinela.prev;
+            return tailSentinela.prev.value;
         } else {
             throw new RuntimeException("Lista esta vazia");
         }
@@ -148,7 +148,7 @@ public class ListaLinked {
         node.prev.next = node.next;
         node.next.prev = node.prev;
         size--;
-        return node;
+        return node.value;
     }
 
     public Node AtRank(int rank){
