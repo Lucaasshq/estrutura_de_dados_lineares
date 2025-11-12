@@ -110,25 +110,32 @@ public class Lista  {
     }
 
     public void insertBefore(int rank, Object o) {
-        if (isEmpty()){
-            throw new RuntimeException("Lista esta vazia");
-        }
-
-        if (rank <= 0 || rank >= size()){
+        if (rank < 0 || rank > size()){
             throw new RuntimeException("indice invalido");
         }
-
+        if (capacidade == size){
+            increase_capacity();
+        }
+        for (int i = size; i > rank; i--){
+            array[i] = array[i-1];
+        }
+        array[rank] = o;
+        size++;
 
     }
 
     public void insertAfter(int rank, Object o) {
-        if (isEmpty()){
-            throw new RuntimeException("Lista esta vazia");
-        }
-
-        if (rank < 0 || rank >= size()-1){
+        if (rank < 0 || rank >= size()){
             throw new RuntimeException("indice invalido");
         }
+        if (capacidade == size){
+            increase_capacity();;
+        }
+        for (int i = size; i > rank+1; i--){
+            array[i] = array[i-1];
+        }
+        array[rank+1] = o;
+        size++;
     }
 
     public void insertFirst(Object o) {
