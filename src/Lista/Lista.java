@@ -44,11 +44,10 @@ public class Lista  {
             throw new RuntimeException("Lista esta vazia");
         }
 
-        if (rank <= 0 || rank >= size()){
+        if (rank <= 0 || rank >= size){
             throw new RuntimeException("indice invalido");
         }
-
-        return array[rank-1];
+        return array[rank - 1];
     }
 
     public Object after(int rank) {
@@ -110,7 +109,7 @@ public class Lista  {
     }
 
     public void insertBefore(int rank, Object o) {
-        if (rank < 0 || rank > size()){
+        if (rank < 0 || rank > size){
             throw new RuntimeException("indice invalido");
         }
         if (capacidade == size){
@@ -125,7 +124,7 @@ public class Lista  {
     }
 
     public void insertAfter(int rank, Object o) {
-        if (rank < 0 || rank >= size()){
+        if (rank < 0 || rank >= size){
             throw new RuntimeException("indice invalido");
         }
         if (capacidade == size){
