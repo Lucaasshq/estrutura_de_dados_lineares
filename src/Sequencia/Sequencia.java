@@ -1,13 +1,10 @@
 package Sequencia;
 
 
-import Lista.ListaLinked;
-import Vetor.Exeception.RankNotFoundExeception;
-
 
 public class Sequencia {
     public class Node {
-        Object value;
+        public Object value;
         Node next, prev;
 
         public Node(Object value){
@@ -218,7 +215,7 @@ public class Sequencia {
         if (rank == size) {
             current = tailSentinela; // inserir no final
         } else {
-            current = elemAtRank(rank); // inserir no meio
+            current = atRank(rank); // inserir no meio
         }
 
         Node newNode = new Node(o);
