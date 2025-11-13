@@ -17,11 +17,9 @@ public class VetorLinkedList implements IVetor {
     private final Node headSentinela;
     private final Node tailSentinela;
     private int size;
-    private int capacidade;
 
     public VetorLinkedList(int capacidade){
         this.size = 0;
-        this.capacidade = capacidade;
 
         headSentinela = new Node(null);
         tailSentinela = new Node(null);
@@ -59,10 +57,6 @@ public class VetorLinkedList implements IVetor {
 
         if (rank < 0 || rank > size){
             throw new RankNotFoundExeception("Rank fora do limite ou não encontrado");
-        }
-
-        if (size == capacidade){
-            throw new VetorCheioExeception("Vetor está cheio.");
         }
         Node current;
         if (rank == size) {

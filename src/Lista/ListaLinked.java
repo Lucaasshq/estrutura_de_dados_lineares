@@ -78,7 +78,7 @@ public class ListaLinked {
         return  tailSentinela.prev == node;
     }
 
-    public void replaceElements(Node node, Object o) {
+    public void replaceElement(Node node, Object o) {
         if (node == headSentinela || node == tailSentinela){
             throw new RuntimeException("Não é possivel alterar valor de nó sentinela");
         }
