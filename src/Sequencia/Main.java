@@ -48,7 +48,7 @@ public class Main {
         seq.removeAtRank(2);
         print(seq);
 
-        System.out.println("\n=== FIM DOS TESTES ===");
+        System.out.println("\n=== FIM ===");
     }
 
 
