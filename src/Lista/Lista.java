@@ -85,7 +85,7 @@ public class Lista  {
         }
         return o.equals(array[size-1]);
     }
-    public Object replaceElements(int rank, Object o) {
+    public Object replaceElement(int rank, Object o) {
         if (isEmpty()){
             throw new RuntimeException("Lista esta vazia");
         }

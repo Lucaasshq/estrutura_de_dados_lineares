@@ -43,8 +43,6 @@ public class PilhaImpl implements Pilha {
         if (t >= capacidade-1){
             if (FC==0){
                 capacidade *= 2;
-            } else {
-                capacidade+= FC;
             }
             Object[] copia = new Object[capacidade];
             for (int i = 0; i < itens.length; i++){

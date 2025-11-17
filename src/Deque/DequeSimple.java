@@ -11,7 +11,7 @@ import Deque.Exeception.DequeVaziaExeception;
 
 public class DequeSimple implements IDeque {
 
-    private class Node {
+    public class Node {
         Object value;
         Node next;
 

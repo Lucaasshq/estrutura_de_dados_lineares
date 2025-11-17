@@ -35,7 +35,7 @@ public class Main {
 
         // Teste 5: Substituição e troca
         System.out.println("\n5. Substituição e troca:");
-        lista.replaceElements(1, 12);
+        lista.replaceElement(1, 12);
         System.out.println("Após replaceElement(1, 12):");
         lista.printLista();
 
