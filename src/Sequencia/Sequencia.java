@@ -1,7 +1,4 @@
 package Sequencia;
-
-
-
 public class Sequencia {
     public class Node {
         public Object value;
@@ -199,7 +196,10 @@ public class Sequencia {
             throw new RuntimeException("Rank fora do limite ou não encontrado");
         }
 
-        Node current = elemAtRank(rank);
+        Node current = headSentinela.next;
+        for (int i = 0; i < rank; i++){
+            current = current.next;
+        }
         Object oldValue = current.value;
         current.value = o;
         return  oldValue;
@@ -215,7 +215,10 @@ public class Sequencia {
         if (rank == size) {
             current = tailSentinela; // inserir no final
         } else {
-            current = atRank(rank); // inserir no meio
+            current = headSentinela.next; // inserir no meio
+            for (int i = 0; i < rank; i++){
+                current = current.next;
+            }
         }
 
         Node newNode = new Node(o);
@@ -229,14 +232,22 @@ public class Sequencia {
 
 
     public Object removeAtRank(int rank) {
-        Node nodeToRemove = elemAtRank(rank);
+        if (isEmpty()){
+            throw new RuntimeException("Sequencia vazia");
+        }
+
+        if (rank < 0 || rank >= size){
+            throw new RuntimeException("Rank fora do indice");
+        }
+
+        Node nodeToRemove = headSentinela.next;
+        for (int i = 0; i < rank; i++){
+            nodeToRemove = nodeToRemove.next;
+        }
         nodeToRemove.prev.next = nodeToRemove.next;
         nodeToRemove.next.prev = nodeToRemove.prev;
 
         size--;
         return nodeToRemove.value;
     }
-
-
-
 }
