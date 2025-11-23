@@ -68,7 +68,6 @@ public class Sequencia {
 
     public boolean isFirst(Node node) {
         return headSentinela.next == node;
-
     }
 
     public boolean isLast(Node node) {

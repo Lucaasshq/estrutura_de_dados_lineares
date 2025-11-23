@@ -8,16 +8,17 @@ import java.util.Arrays;
 public class Vetor implements IVetor  {
 
     private Object[] array;
-    private int tamanho;
+    private int size;
 
     public Vetor(int capacidade){
         this.array = new Object[capacidade];
-        this.tamanho = 0;
+        this.size = 0;
     }
+
 
     @Override
     public Object elemAtRank(int rank) {
-        if (rank < 0 || rank >= tamanho) {
+        if (rank < 0 || rank >= size) {
             throw new RankNotFoundExeception("Rank fora do limte ou não encontrado");
         }
         return array[rank];
@@ -25,7 +26,7 @@ public class Vetor implements IVetor  {
 
     @Override
     public Object replaceArRank(int rank, Object o) {
-        if (rank < 0 || rank >= tamanho){
+        if (rank < 0 || rank >= size){
             throw new RankNotFoundExeception("Rank fora do limte ou não encontrado");
         }
         Object elemento_antigo = array[rank];
@@ -36,44 +37,44 @@ public class Vetor implements IVetor  {
     @Override
     public void insertAtRank(int rank, Object o) {
 
-        if (rank < 0 || rank > tamanho) {
+        if (rank < 0 || rank > size) {
             throw new IndexOutOfBoundsException("Rank fora dos limites do vetor.");
         }
 
-        if (tamanho == array.length) {
+        if (size == array.length) {
             throw new VetorCheioExeception("Vetor esta cheio");
         }
 
-        for (int i = tamanho; i > rank; i--){
+        for (int i = size; i > rank; i--){
             array[i]= array[i-1];
         }
         array[rank] = o;
-        tamanho++;
+        size++;
     }
 
     @Override
     public Object removeAtRank(int rank) {
-        if (rank < 0 || rank >= tamanho){
+        if (rank < 0 || rank >= size){
             throw new RankNotFoundExeception("Rank fora do limte ou não encontrado");
         }
         Object elemento_remover = array[rank];
 
-        for (int i = rank; i < tamanho-1; i++){
+        for (int i = rank; i < size-1; i++){
             array[i] = array[i+1];
         }
-        array[tamanho-1] = null;
-        tamanho--;
+        array[size-1] = null;
+        size--;
         return elemento_remover;
     }
 
     @Override
     public int size() {
-        return tamanho;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return tamanho == 0;
+        return size == 0;
     }
 
     public void printVetor(){
