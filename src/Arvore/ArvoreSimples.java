@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class ArvoreSimples {
-
     Node raiz;
     int tamanho;
 
@@ -54,9 +53,14 @@ public class ArvoreSimples {
         return node.element();
     }
 
+    public void swapElement(Node node1, Node node2){
+        Object temp = node1.o;
+        node1.o = node2.o;
+        node2.o = temp;
+    }
+
     public int depth(Node node){
-        int profundidade = profundidade(node);
-        return profundidade;
+        return profundidade(node);
     }
 
     private int profundidade(Node node){
@@ -65,6 +69,41 @@ public class ArvoreSimples {
         } else {
             return 1+profundidade(node.parent());
         }
+    }
+
+    public boolean isEmpty(){
+        return false;
+    }
+
+    public int height(Node node){
+        if (isExternal(node)){
+            return 0;
+        } else {
+           int h = 0;
+           Iterator<Node> w = node.children();
+            while (w.hasNext()){
+                Node x = (Node) w.next();
+                h = Math.max(h, height(x));
+            }
+            return 1+h;
+        }
+    }
+
+    public int size(){
+        return tamanho;
+    }
+
+    public Iterator elements(){
+
+    }
+
+    public Iterator Nodes(){
+
+    }
+
+    public Object replaceElement(Node node, Object o){
+        node.o = o;
+        return o;
     }
 
 
