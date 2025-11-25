@@ -50,7 +50,7 @@ public class ArvoreSimples {
             throw new RuntimeException("Nó invalido");
         }
         tamanho--;
-        return node.element();
+        return node.getElement();
     }
 
     public void swapElement(Node node1, Node node2){
@@ -80,10 +80,10 @@ public class ArvoreSimples {
             return 0;
         } else {
            int h = 0;
-           Iterator<Node> w = node.children();
-            while (w.hasNext()){
-                Node x = (Node) w.next();
-                h = Math.max(h, height(x));
+           Iterator<Node> filhos = node.children();
+            while (filhos.hasNext()){
+                Node filho =  filhos.next();
+                h = Math.max(h, height(filho));
             }
             return 1+h;
         }
@@ -93,12 +93,27 @@ public class ArvoreSimples {
         return tamanho;
     }
 
-    public Iterator elements(){
-
+    public Iterator<Object> elements(){
+        ArrayList<Object> elems = new ArrayList<>();
+        Iterator<Node> iterator = nodes();
+        while (iterator.hasNext()){
+            elems.add(iterator.next().getElement());
+        }
+        return elems.iterator();
     }
 
-    public Iterator Nodes(){
+    private void preOrder(Node n, ArrayList<Node> lista){
+        lista.add(n);
+        Iterator<Node> listIt = n.children();
+        while (listIt.hasNext()){
+            preOrder(listIt.next(), lista);
+        }
+    }
 
+    public Iterator<Node> nodes(){
+        ArrayList<Node> lista = new ArrayList<>();
+        preOrder(raiz, lista);
+        return lista.iterator();
     }
 
     public Object replaceElement(Node node, Object o){
@@ -117,7 +132,7 @@ public class ArvoreSimples {
             this.o = o;
         }
 
-        public Object element() {return o;}
+        public Object getElement() {return o;}
         public Node parent(){return pai;}
         public void setElement(Object o){this.o = o;}
         public void addChild(Node node){ filhos.add(node);}
