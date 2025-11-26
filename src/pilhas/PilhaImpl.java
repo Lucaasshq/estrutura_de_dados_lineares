@@ -8,15 +8,10 @@ public class PilhaImpl implements Pilha {
     private int capacidade;
     private Object[] itens;
     private int t;
-    private int FC;
 
     public PilhaImpl(int capacidade, int crescimento){
         this.capacidade = capacidade;
         this.t = -1;
-        this.FC = crescimento;
-        if (crescimento <= 0){
-            this.FC = 0;
-        }
         itens =  new Object[capacidade];
     }
 
@@ -41,9 +36,6 @@ public class PilhaImpl implements Pilha {
     @Override
     public void push(Object o) {
         if (t >= capacidade-1){
-            if (FC==0){
-                capacidade *= 2;
-            }
             Object[] copia = new Object[capacidade];
             for (int i = 0; i < itens.length; i++){
                 copia[i] = itens[i];

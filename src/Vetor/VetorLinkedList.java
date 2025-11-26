@@ -46,7 +46,10 @@ public class VetorLinkedList implements IVetor {
             throw new RankNotFoundExeception("Rank fora do limite ou não encontrado");
         }
 
-        Node current = elemAtRank(rank);
+        Node current = headSentinela.next;
+        for (int i = 0; i < rank; i++){
+            current = current.next;
+        }
         Object oldValue = current.value;
         current.value = o;
         return  oldValue;
