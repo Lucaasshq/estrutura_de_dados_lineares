@@ -13,10 +13,6 @@ public class ArvoreBinariaPesquisa {
         this.tamanho = 0;
     }
 
-    /* ===========================================
-            MÉTODOS DO TAD ÁRVORE
-       =========================================== */
-
     public Node root() {
         return raiz;
     }
@@ -47,10 +43,6 @@ public class ArvoreBinariaPesquisa {
         return 1 + Math.max(height(n.left), height(n.right));
     }
 
-    /* ===========================================
-            TAD ÁRVORE BINÁRIA
-       =========================================== */
-
     public Node leftChild(Node n) {
         return n.left;
     }
@@ -66,11 +58,6 @@ public class ArvoreBinariaPesquisa {
     public boolean hasRight(Node n) {
         return n.hasRight();
     }
-
-
-    /* ===========================================
-            INSERÇÃO (BST)
-       =========================================== */
 
     public Node insert(int key) {
 
@@ -104,16 +91,33 @@ public class ArvoreBinariaPesquisa {
         return novo;
     }
 
+    public Node search(int key){
+        Node atual = raiz;
 
-    /* ===========================================
-            REMOVE EM APENAS UMA FUNÇÃO
-       =========================================== */
+        while (atual != null){
+
+            int value = (int) atual.element;
+
+            if (key == value){
+                return atual;
+            }
+
+            else if (key < value){
+                atual = atual.left;
+            }
+
+            else {
+                atual = atual.right;
+            }
+        }
+        return null;
+    }
 
     public void remove(int key) {
         Node pai = null;
         Node atual = raiz;
 
-        // 1) Buscar o nó
+        // Buscar o nó
         while (atual != null && (int) atual.element != key) {
             pai = atual;
             if (key < (int) atual.element)
@@ -124,7 +128,7 @@ public class ArvoreBinariaPesquisa {
 
         if (atual == null) return; // não achou
 
-        // -------- CASO 1: NÓ FOLHA --------
+        //  caso 1: no folja
         if (atual.left == null && atual.right == null) {
 
             if (pai == null) { // era raiz
@@ -139,7 +143,7 @@ public class ArvoreBinariaPesquisa {
             return;
         }
 
-        // -------- CASO 2: UM FILHO --------
+        //  caso 2: um filho
         if (atual.left == null || atual.right == null) {
 
             Node filho = (atual.left != null) ? atual.left : atual.right;
@@ -156,7 +160,7 @@ public class ArvoreBinariaPesquisa {
             return;
         }
 
-        // -------- CASO 3: DOIS FILHOS --------
+        //  Caso 3: dois filhos
         Node pSucc = atual;
         Node succ = atual.right;
 
@@ -179,11 +183,7 @@ public class ArvoreBinariaPesquisa {
 
         tamanho--;
     }
-
-    /* ===========================================
-            TRAVESSIAS
-       =========================================== */
-
+    // travesias
     public void preOrder(Node n) {
         if (n == null) return;
         System.out.print(n.element + " ");
@@ -204,10 +204,6 @@ public class ArvoreBinariaPesquisa {
         postOrder(n.right);
         System.out.print(n.element + " ");
     }
-
-    /* ===========================================
-            ITERAÇÃO DE NODES (como ArvoreSimples)
-       =========================================== */
 
     public Iterator<Node> nodes() {
         ArrayList<Node> lista = new ArrayList<>();
@@ -230,11 +226,6 @@ public class ArvoreBinariaPesquisa {
 
         return elems.iterator();
     }
-
-
-    /* ===========================================
-            DESENHAR ARVORE
-       =========================================== */
 
     public void desenharArvore() {
         int h = height(raiz);
@@ -264,12 +255,6 @@ public class ArvoreBinariaPesquisa {
         preencherMatriz(n.left, mat, linha + 1, esq, meio - 1);
         preencherMatriz(n.right, mat, linha + 1, meio + 1, dir);
     }
-
-
-    /* ===========================================
-                    NODE (NO ESTILO DA ARVORESIMPLES)
-       =========================================== */
-
     public class Node {
 
         private Node parent;
@@ -312,13 +297,6 @@ public class ArvoreBinariaPesquisa {
             return f.iterator();
         }
     }
-
-
-
-    /* ===========================================
-                   MAIN DE TESTE
-       =========================================== */
-
     public static void main(String[] args) {
 
         ArvoreBinariaPesquisa arv = new ArvoreBinariaPesquisa();
@@ -328,10 +306,20 @@ public class ArvoreBinariaPesquisa {
         for (int v : valores)
             arv.insert(v);
 
-        System.out.println("\n=== ÁRVORE ===");
+        System.out.println("=== ÁRVORE ===");
         arv.desenharArvore();
 
-        System.out.println("\nPré-Ordem:");
+        System.out.println("\n Search");
+        System.out.println(arv.search(10).element);
+        Node value = arv.search(100);
+
+        if (value == null){
+            System.out.println("Essa chave não existe na arvore");
+        } else {
+            System.out.println(value.element);
+        }
+
+        System.out.println("Pré-Ordem:");
         arv.preOrder(arv.root());
 
         System.out.println("\n\nEm-Ordem:");
@@ -341,7 +329,7 @@ public class ArvoreBinariaPesquisa {
         arv.postOrder(arv.root());
         System.out.println();
 
-        System.out.println("\nRemovendo 3...");
+        System.out.println("\nRemovendo 3");
         arv.remove(3);
         arv.desenharArvore();
     }
