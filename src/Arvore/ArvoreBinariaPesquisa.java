@@ -1,5 +1,5 @@
-package Arvore;
 
+package Arvore;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -128,10 +128,10 @@ public class ArvoreBinariaPesquisa {
 
         if (atual == null) return; // não achou
 
-        //  caso 1: no folja
+        //  Caso 1: Nó Folha
         if (atual.left == null && atual.right == null) {
 
-            if (pai == null) { // era raiz
+            if (pai == null) {
                 raiz = null;
             }
             else if (pai.left == atual)
@@ -143,11 +143,20 @@ public class ArvoreBinariaPesquisa {
             return;
         }
 
-        //  caso 2: um filho
+        //  Caso 2: No com Um Filho
         if (atual.left == null || atual.right == null) {
 
-            Node filho = (atual.left != null) ? atual.left : atual.right;
+            Node filho;
 
+
+            if (atual.left != null) {
+                filho = atual.left;
+            } else {
+                filho = atual.right;
+            }
+
+
+            // Conecta o pai do nó atual ao neto
             if (pai == null)
                 raiz = filho;
             else if (pai.left == atual)
@@ -155,12 +164,13 @@ public class ArvoreBinariaPesquisa {
             else
                 pai.right = filho;
 
+
             filho.parent = pai;
             tamanho--;
             return;
         }
 
-        //  Caso 3: dois filhos
+        //  Caso 3: No com Dois Filhos
         Node pSucc = atual;
         Node succ = atual.right;
 
@@ -169,10 +179,10 @@ public class ArvoreBinariaPesquisa {
             succ = succ.left;
         }
 
-        // copiar valor do sucessor
+        // Copia valor do sucessor
         atual.element = succ.element;
 
-        // remover sucessor
+        // Remove o sucessor
         if (pSucc.left == succ) {
             pSucc.left = succ.right;
             if (succ.right != null) succ.right.parent = pSucc;
@@ -320,6 +330,7 @@ public class ArvoreBinariaPesquisa {
         }
 
         System.out.println("Pré-Ordem:");
+
         arv.preOrder(arv.root());
 
         System.out.println("\n\nEm-Ordem:");
